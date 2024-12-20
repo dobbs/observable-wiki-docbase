@@ -1,5 +1,9 @@
 # Observable Wiki Docbase
 
-This is the home page of your new Observable Framework app.
+```js
+import {safeHtml} from './components/wiki-link.js';
+```
 
-For more, see <https://observablehq.com/framework/getting-started>.
+```js
+display(safeHtml`<em>[[Hello World]]</em><p>[http://start.fed.wiki start.fed.wiki]</p>`);
+```
