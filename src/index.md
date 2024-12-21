@@ -1,9 +1,20 @@
 # Observable Wiki Docbase
 
+
 ```js
-import {safeHtml} from './components/wiki-link.js';
+import {panel} from './components/panel.js';
+```
+
+
+```js
+const page = await fetch('//wiki.dbbs.co/welcome-visitors.json').then(res => res.json());
+display(page);
 ```
 
 ```js
-display(safeHtml`<em>[[Hello World]]</em><p>[http://start.fed.wiki start.fed.wiki]</p>`);
+display(panel({
+    id: 'adf4cc3322',
+    site: {url: '//wiki.dbbs.co/'},
+    page
+}));
 ```
