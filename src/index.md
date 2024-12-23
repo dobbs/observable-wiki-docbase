@@ -2,13 +2,30 @@
 
 
 ```js
-import {panel} from './components/panel.js';
+import {panel, pageData} from './components/panel.js';
+import {intentFromLocation} from './components/lineup.js';
 ```
 
-
 ```js
-const page = await fetch('//wiki.dbbs.co/welcome-visitors.json').then(res => res.json());
-display(page);
+const action = intentFromLocation(window.location);
+let page = {};
+if (action.intent == "fetch") {
+  page = await fetch(action.url, {mode: 'cors'})
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.status)
+      }
+    })
+    .catch(error => {action, error});
+}
+const data = pageData(page);
+display({
+  action,
+  page,
+  data
+});
 ```
 
 ```js

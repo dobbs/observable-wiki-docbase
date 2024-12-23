@@ -19,7 +19,9 @@ plugins.set('unknown', {
 plugins.set('html', {
   type: 'html',
   fn(item) {
-    return safeHtml({raw: item.text});
+    const div = html`<div class="item html"></div>`;
+    div.innerHTML = item.text;
+    return safeHtml`${div}`;
   }
 });
 
@@ -27,21 +29,23 @@ const md = markdownit();
 plugins.set('markdown', {
   type: 'markdown',
   fn(item) {
-    return safeHtml`${md.render(item.text)}`;
+    const div = html`<div class="item markdown"></div>`;
+    div.innerHTML = md.render(item.text);
+    return safeHtml`${div}`;
   }
 });
 
 plugins.set('pagefold', {
   type: 'pagefold',
   fn(item) {
-    return safeHtml`<hr class="pagefold" data-content="${item.text}">`;
+    return safeHtml`<div class="item pagefold"><hr data-content="${item.text}"></div>`;
   }
 });
 
 plugins.set('paragraph', {
   type: 'paragraph',
   fn(item) {
-    return safeHtml`<p>${item.text}</p>`;
+    return safeHtml`<div class="item paragraph"><p>${item.text}</p></div>`;
   }
 });
 
@@ -50,9 +54,11 @@ plugins.set('reference', {
   fn(item) {
     const {site, slug, title, text} = item;
     const flag = `//${site}/favicon.png`;
-    return safeHtml`
-      <p data-site="${site}"><img class="remote" src="${flag}">
-        <a class="internal" data-title="${title}"
-           href="//${site}/${slug}.html">${title}</a> - ${text}`;
+    return safeHtml`<div class="item reference">
+<p data-site="${site}"><img class="remote" src="${flag}">
+  <a class="internal" data-title="${title}"
+     href="//${site}/${slug}.html">${title}</a> - ${text}
+</p>
+</div>`;
   }
 });
