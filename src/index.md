@@ -2,13 +2,13 @@
 
 
 ```js
-import {panel, pageData} from './components/panel.js';
+import {panelViewer, pageData} from './components/panel.js';
 import {intentFromLocation} from './components/lineup.js';
 ```
 
 ```js
 const action = intentFromLocation(window.location);
-let page = {};
+let page = {}, el, data;
 if (action.intent == "fetch") {
   page = await fetch(action.url, {mode: 'cors'})
     .then(res => {
@@ -19,8 +19,18 @@ if (action.intent == "fetch") {
       }
     })
     .catch(error => {action, error});
+  data = pageData(page);
+  const panel = {
+    id: 'adf4cc3322',
+    site: {url: action.url},
+    page
+  };
+  el = panelViewer(panel);
+} else {
+  el = html`<a href="?url=https://wiki.dbbs.co/welcome-visitors.json">
+https://wiki.dbbs.co/welcome-visitors.json
+</a>`;
 }
-const data = pageData(page);
 display({
   action,
   page,
@@ -29,9 +39,5 @@ display({
 ```
 
 ```js
-display(panel({
-    id: 'adf4cc3322',
-    site: {url: '//wiki.dbbs.co/'},
-    page
-}));
+display(el);
 ```

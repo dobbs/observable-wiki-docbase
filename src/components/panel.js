@@ -1,7 +1,7 @@
 import {html, svg} from 'npm:htl';
 import {plugins} from './plugins.js';
 
-export function panel({
+export function panelViewer({
   id,
   site,
   page
@@ -12,7 +12,7 @@ export function panel({
 <div class="twins">
 </div>
 <header>
-  <h1><img src="${site.url}/favicon.png" alt="${site.url}"> ${title}</h1>
+  <h1><img src="${new URL('/favicon.png', site.url)}" alt="${site.url}"> ${title}</h1>
 </header>
 ${story.map(item => {
   const plugin = plugins.get(item.type.toLowerCase()) || plugins.get('unknown');
