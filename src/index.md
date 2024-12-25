@@ -13,7 +13,7 @@ a.external::after {
 ```js
 import {panelViewer, pageData} from './components/panel.js';
 import {intentFromLocation} from './components/lineup.js';
-import {fromJsonURL} from './components/site.js';
+import {fromJsonURL, siteViewer} from './components/site.js';
 ```
 
 ```js
@@ -37,6 +37,8 @@ if (action.intent == "fetch") {
     page
   };
   el = panelViewer(panel);
+} else if (action.intent == "site") {
+  site = fromJsonURL(action.url);
 } else {
   el = html`<a href="?url=https://wiki.dbbs.co/welcome-visitors.json">
 https://wiki.dbbs.co/welcome-visitors.json
@@ -44,9 +46,16 @@ https://wiki.dbbs.co/welcome-visitors.json
 }
 display({
   action,
+  site,
   page,
   data
 });
+```
+
+```js
+if (site) {
+  display(siteViewer(site));
+}
 ```
 
 ```js

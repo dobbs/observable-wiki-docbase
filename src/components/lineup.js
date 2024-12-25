@@ -1,12 +1,34 @@
 export function intentFromLocation(location) {
-  let params = new URLSearchParams(location.search);
-  if (params.has('url')) {
+  try {
+    let params = new URLSearchParams(location.search);
+    if (params.has('url')) {
+      const urlstring = params.get('url');
+      const url = new URL(
+        urlstring.match(/^http|^\/^\//)
+          ? urlstring
+          : `//${urlstring}`,
+        location);
+      if (url.pathname.toLowerCase().endsWith('json')) {
+        return {
+          intent: 'fetch',
+          url
+        };
+      } else {
+        return {
+          intent: 'site',
+          url
+        };
+      }
+    } else {
+      return {
+        intent: 'unknown',
+      };
+    }
+  } catch (error) {
     return {
-      intent: 'fetch',
-      url: new URL(params.get('url'), location.origin)
+      intent: 'unknown',
+      error
     };
   }
-  return {
-    intent: 'unknown'
-  };
+  let params = new URLSearchParams(location.search);
 }

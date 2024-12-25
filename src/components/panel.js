@@ -6,8 +6,8 @@ export function panelViewer({
   site,
   page
 }) {
-  const {title, story=[], journal=[]} = page;
-  return html`
+  const {title=null, story=[], journal=[]} = page;
+  const el = html`
 <article id="${id}">
 <div class="twins">
 </div>
@@ -24,6 +24,14 @@ ${story.map(item => {
 </footer>
 </article>
 `;
+  const data = pageData(site.base, page);
+  el.addEventListener('wiki-link', async event => {
+    const {title:wantedTitle} = event.detail;
+    for (let somesite of data.sites) {
+
+    }
+  });
+  return el;
 }
 
 export function pageData(base, page) {
