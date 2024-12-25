@@ -57,7 +57,12 @@ function annotateLinks(el) {
       a.onclick = event => {
         event.preventDefault();
         event.stopPropagation();
-        a.dispatchEvent(new Event('wiki-link', {bubbles: true}));
+        a.dispatchEvent(new CustomEvent('wiki-link', {
+          bubbles: true,
+          detail: {
+            title: a.dataset.title
+          }
+        }));
       };
     } else {
       a.setAttribute('target', '_blank');

@@ -12,7 +12,7 @@ export function panelViewer({
 <div class="twins">
 </div>
 <header>
-  <h1><img src="${new URL('/favicon.png', site.url)}" alt="${site.url}"> ${title}</h1>
+  <h1><img src="${site.favicon}" alt="${site.base}"> ${title}</h1>
 </header>
 ${story.map(item => {
   const plugin = plugins.get(item.type.toLowerCase()) || plugins.get('unknown');
@@ -26,7 +26,7 @@ ${story.map(item => {
 `;
 }
 
-export function pageData(page) {
+export function pageData(base, page) {
   const {title='Untitled', story=[], journal=[]} = page;
   const storyData = story.reduce(
     (acc,item) => (acc.itemIds.add(item.id), acc),
@@ -43,7 +43,7 @@ export function pageData(page) {
     },
     {
       sites: {
-        page: new Set(),
+        page: new Set([base]),
         item: new Map()
       }
     }

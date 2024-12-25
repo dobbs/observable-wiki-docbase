@@ -4,12 +4,14 @@
 ```js
 import {panelViewer, pageData} from './components/panel.js';
 import {intentFromLocation} from './components/lineup.js';
+import {fromJsonURL} from './components/site.js';
 ```
 
 ```js
 const action = intentFromLocation(window.location);
-let page = {}, el, data;
+let site, page = {}, el, data;
 if (action.intent == "fetch") {
+  site = fromJsonURL(action.url);
   page = await fetch(action.url, {mode: 'cors'})
     .then(res => {
       if (res.ok) {
@@ -19,10 +21,10 @@ if (action.intent == "fetch") {
       }
     })
     .catch(error => {action, error});
-  data = pageData(page);
+  data = pageData(site.base, page);
   const panel = {
     id: 'adf4cc3322',
-    site: {url: action.url},
+    site,
     page
   };
   el = panelViewer(panel);
