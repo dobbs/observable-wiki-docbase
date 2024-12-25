@@ -1,4 +1,4 @@
-import {html, svg} from 'npm:htl';
+import {html} from 'npm:htl';
 import {plugins} from './plugins.js';
 
 export function panelViewer({
