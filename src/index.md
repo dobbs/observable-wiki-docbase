@@ -1,6 +1,15 @@
 # Observable Wiki Docbase
 
 
+<style>
+a.external::after {
+  content: '⇧';
+  display: inline-block;
+  font-size: 80%;
+  transform: rotate(45deg);
+}
+</style>
+
 ```js
 import {panelViewer, pageData} from './components/panel.js';
 import {intentFromLocation} from './components/lineup.js';
