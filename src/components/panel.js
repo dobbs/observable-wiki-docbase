@@ -27,8 +27,10 @@ ${story.map(item => {
   const data = pageData(site.base, page);
   el.addEventListener('wiki-link', async event => {
     const {title:wantedTitle} = event.detail;
-    for (let somesite of data.sites) {
-
+    let found = site.sitemap.find(({title, slug}) =>
+      title.toLowerCase() == wantedTitle.toLowerCase());
+    if (found) {
+      location = new URL(`?url=${site.base}${found.slug}.json`, location);
     }
   });
   return el;
