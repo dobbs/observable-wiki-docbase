@@ -1,5 +1,18 @@
 # Observable Wiki Docbase
 
+Here are some examples of using this tool to browse existing wiki sites.
+
+A federated wiki:
+https://dobbs.github.io/observable-wiki-docbase/?url=https://wiki.dbbs.co/
+
+A static site generated wiki:
+https://dobbs.github.io/observable-wiki-docbase/?url=https://wander.dbbs.co/
+
+A sketch of a folder of wiki pages and a sitemap
+https://dobbs.github.io/observable-wiki-docbase/?url=https://dobbs.github.io/wiki-spike-docbase/-eric/wander/six-levels-down.json
+
+
+
 This is an [Observable Framework](https://observablehq.com/framework/) app. To install the required dependencies, run:
 
 ```

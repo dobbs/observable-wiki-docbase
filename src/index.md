@@ -40,9 +40,19 @@ if (action.intent == "fetch") {
 } else if (action.intent == "site") {
   site = fromJsonURL(action.url);
 } else {
-  el = html`<a href="?url=https://wiki.dbbs.co/welcome-visitors.json">
-https://wiki.dbbs.co/welcome-visitors.json
-</a>`;
+  el = html`
+<p>Here are some examples of using this tool to browse existing wiki sites.</p>
+
+<p>A federated wiki:<br>
+<a href="?url=https://wiki.dbbs.co/">https://wiki.dbbs.co/</a></p>
+
+<p>A static site generated wiki:<br>
+<a href="?url=https://wander.dbbs.co/">https://wander.dbbs.co/</a></p>
+
+<p>A sketch of a folder of wiki pages and a sitemap:<br>
+<a href="?url=https://dobbs.github.io/wiki-spike-docbase/-eric/wander/">
+https://dobbs.github.io/wiki-spike-docbase/-eric/wander/
+</a></p>`;
 }
 display({
   action,
