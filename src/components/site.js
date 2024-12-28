@@ -9,7 +9,8 @@ export function fromJsonURL(url) {
     sitemapURL: new URL('./system/sitemap.json', base),
     siteindexURL: new URL('./system/site-index.json', base),
     sitemap: null,
-    siteindex: null
+    siteindex: null,
+    resolvePage: null
   };
   site.fetchSitemap = fetcher('sitemap', site.sitemapURL);
   site.fetchSiteindex = fetcher('siteindex', site.siteindexURL);
@@ -28,6 +29,15 @@ export function fromJsonURL(url) {
         };
       }
     }
+  }
+  site.resolvePage = function resolvePage(wantedTitle) {
+    let url = null;
+    const found = site.sitemap.find(({title, slug}) =>
+      title.toLowerCase() == wantedTitle.toLowerCase());
+    if (found) {
+      url = new URL(`./${found.slug}.json`, site.base);
+    }
+    return url
   }
   return site;
 }
